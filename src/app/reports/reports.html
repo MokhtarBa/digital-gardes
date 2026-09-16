@@ -1,0 +1,85 @@
+<div class="admin-module">
+  <app-admin-sidebar></app-admin-sidebar>
+
+  <main class="module-main">
+    <app-admin-topbar></app-admin-topbar>
+
+    <section class="module-content">
+      <div class="toolbar">
+        <div>
+          <h1>Reports</h1>
+          <p class="subtitle">
+            Live academic activity, class enrolment, and grade-form approval data.
+          </p>
+        </div>
+        <button class="primary" type="button" (click)="loadReport()">
+          <svg class="button-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 12a8 8 0 1 1-2.35-5.65M20 4v5h-5" /></svg
+          >{{ isLoading ? 'Refreshing…' : 'Refresh Report' }}
+        </button>
+      </div>
+
+      @if (error) {
+        <p class="form-error" role="alert">{{ error }}</p>
+      }
+
+      <section class="metric-grid">
+        <article class="card metric">
+          <span class="metric-icon" aria-hidden="true"
+            ><svg viewBox="0 0 24 24">
+              <path d="M4 19.5h16M6.5 17.5v-5.25h3.2v5.25m2.6 0V8.25h3.2V17.5m2.6 0v-7h3.2v7" />
+              <path d="m5.5 9.25 4-3 3 1.75 5-4" /></svg></span
+          ><strong>{{ summary.enrolledStudents }}</strong
+          ><span>Class enrolments</span>
+        </article>
+        <article class="card metric">
+          <span class="metric-icon" aria-hidden="true"
+            ><svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="8.5" />
+              <path d="m8.25 12.1 2.35 2.35 5.2-5.2" /></svg></span
+          ><strong>{{ approvalRate }}%</strong><span>Grade-form approval rate</span>
+        </article>
+        <article class="card metric">
+          <span class="metric-icon" aria-hidden="true"
+            ><svg viewBox="0 0 24 24">
+              <circle cx="9" cy="8" r="3.1" />
+              <path
+                d="M3.75 19.5c.55-3.25 2.32-5 5.25-5s4.7 1.75 5.25 5M16.5 5.25a3.1 3.1 0 0 1 0 5.95M16.5 14.5c2.2 0 3.65 1.1 4.3 3.4"
+              /></svg></span
+          ><strong>{{ summary.students }}</strong
+          ><span>Student accounts</span>
+        </article>
+      </section>
+
+      <section class="report-grid">
+        <article class="card">
+          <header><h2>Live System Activity</h2></header>
+          <div class="bars" aria-label="Live system activity chart">
+            <i [style.height.%]="percent(summary.totalClasses)"></i
+            ><i [style.height.%]="percent(summary.activeClasses)"></i
+            ><i [style.height.%]="percent(summary.submittedForms)"></i
+            ><i [style.height.%]="percent(summary.approvedForms)"></i>
+          </div>
+          <p>All Classes　 Active Classes　 Submitted Forms　 Approved Forms</p>
+        </article>
+        <article class="card">
+          <header><h2>Live Academic Summary</h2></header>
+          <div class="report-list">
+            <div>
+              <span>All classes</span><b>{{ summary.totalClasses }}</b>
+            </div>
+            <div>
+              <span>Active classes</span><b>{{ summary.activeClasses }}</b>
+            </div>
+            <div>
+              <span>Professors</span><b>{{ summary.professors }}</b>
+            </div>
+            <div>
+              <span>Forms awaiting approval</span><b>{{ summary.pendingForms }}</b>
+            </div>
+          </div>
+        </article>
+      </section>
+    </section>
+  </main>
+</div>

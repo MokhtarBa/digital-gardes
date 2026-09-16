@@ -1,0 +1,116 @@
+<div class="admin-module">
+  <app-admin-sidebar></app-admin-sidebar>
+  <main class="module-main">
+    <app-admin-topbar title="Dashboard"></app-admin-topbar>
+    <section class="dashboard-content">
+      <section class="summary-grid" aria-label="Administration summary">
+        <article class="summary-card blue">
+          <div>
+            <span>Total Classes</span><strong>{{ summary.totalClasses }}</strong
+            ><small>{{ summary.activeClasses }} active classes</small>
+          </div>
+          <i
+            ><svg viewBox="0 0 24 24">
+              <path
+                d="M4 5.25A2.25 2.25 0 0 1 6.25 3h11.5A2.25 2.25 0 0 1 20 5.25v13.5a2.25 2.25 0 0 1-2.25 2.25H6.25A2.25 2.25 0 0 1 4 18.75V5.25Z"
+              />
+              <path d="M8 7.5h8M8 11.5h8M8 15.5h4.5" /></svg
+          ></i>
+        </article>
+        <article class="summary-card purple">
+          <div>
+            <span>Professors</span><strong>{{ summary.professors }}</strong
+            ><small>{{ summary.submittedForms }} grade forms submitted</small>
+          </div>
+          <i
+            ><svg viewBox="0 0 24 24">
+              <circle cx="9" cy="8" r="3.1" />
+              <path
+                d="M3.75 19.5c.55-3.25 2.32-5 5.25-5s4.7 1.75 5.25 5M16.5 5.25a3.1 3.1 0 0 1 0 5.95M16.5 14.5c2.2 0 3.65 1.1 4.3 3.4"
+              /></svg
+          ></i>
+        </article>
+        <article class="summary-card green">
+          <div>
+            <span>Student Accounts</span><strong>{{ summary.students }}</strong
+            ><small>{{ summary.enrolledStudents }} enrolled across classes</small>
+          </div>
+          <i
+            ><svg viewBox="0 0 24 24">
+              <circle cx="12" cy="7.25" r="3.25" />
+              <path d="M5.25 20c.7-3.82 2.94-5.75 6.75-5.75s6.05 1.93 6.75 5.75" /></svg
+          ></i>
+        </article>
+        <article class="summary-card orange">
+          <div>
+            <span>Administrators</span><strong>{{ summary.administrators }}</strong
+            ><small>Accounts with admin access</small>
+          </div>
+          <i
+            ><svg viewBox="0 0 24 24">
+              <path d="M12 3.25 19 6v5.1c0 4.15-2.72 7.85-7 9.65-4.28-1.8-7-5.5-7-9.65V6l7-2.75Z" />
+              <circle cx="12" cy="10" r="2.1" />
+              <path d="M8.75 16.2c.55-2.1 1.63-3.15 3.25-3.15s2.7 1.05 3.25 3.15" /></svg
+          ></i>
+        </article>
+      </section>
+
+      <section class="analytics-grid">
+        <article class="panel statistics-panel">
+          <header>
+            <div>
+              <h2>System Statistics</h2>
+              <p>Live class and grade-form activity</p>
+            </div>
+            <b>{{ summary.pendingForms }} awaiting approval</b>
+          </header>
+          <div class="live-stat-list">
+            <div>
+              <span>Enrolled students</span><b>{{ summary.enrolledStudents }}</b>
+            </div>
+            <div>
+              <span>Submitted grade forms</span><b>{{ summary.submittedForms }}</b>
+            </div>
+            <div>
+              <span>Approved grade forms</span><b>{{ summary.approvedForms }}</b>
+            </div>
+            <div>
+              <span>Active classes</span><b>{{ summary.activeClasses }}</b>
+            </div>
+          </div>
+        </article>
+        <article class="panel distribution-panel">
+          <header>
+            <h2>Grade Distribution</h2>
+            <p>Current semester</p>
+          </header>
+          <div class="grade-empty">
+            <span>◎</span><b>No grade data yet</b>
+            <p>Grade distribution will appear after professors submit grades.</p>
+          </div>
+        </article>
+      </section>
+
+      <article class="panel activity-panel">
+        <header>
+          <h2>Recent Activity</h2>
+          <button type="button" (click)="refresh()">
+            {{ isLoading ? 'Loading…' : 'Refresh live data' }}
+          </button>
+        </header>
+        @for (activity of activities; track activity.id) {
+          <div class="activity-row">
+            <span>{{ activity.title }}</span
+            ><small>{{ activity.detail }}</small
+            ><time>{{ activity.createdAt | date: 'short' }}</time>
+          </div>
+        } @empty {
+          <div class="activity-row">
+            <span>No activity yet</span
+            ><small>Create a class or approve a grade form to see it here.</small><time>—</time>
+          </div>
+        }
+      </article>
+    </section>
+  </main>
+</div>

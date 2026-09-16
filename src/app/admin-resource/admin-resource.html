@@ -1,0 +1,190 @@
+<div class="resource-shell">
+  <aside class="sidebar" [class.open]="sidebarOpen">
+    <div class="brand">
+      <div class="brand-mark">DG</div>
+      <div><strong>Digital Grades</strong><span>Admin Portal</span></div>
+    </div>
+    <nav class="navigation">
+      <button type="button" class="nav-item" (click)="navigateTo('dashboard')">
+        <span class="icon">▦</span><span>Dashboard</span>
+      </button>
+      <span class="nav-label">ACADEMIC</span>
+      <button
+        type="button"
+        class="nav-item"
+        [class.active]="config.title === 'Academic Cycles'"
+        (click)="navigateTo('cycles')"
+      >
+        <span class="icon">◷</span><span>Academic Cycles</span>
+      </button>
+      <button
+        type="button"
+        class="nav-item"
+        [class.active]="config.title === 'Academic Years'"
+        (click)="navigateTo('years')"
+      >
+        <span class="icon">□</span><span>Academic Years</span>
+      </button>
+      <button
+        type="button"
+        class="nav-item"
+        [class.active]="config.title === 'Classes'"
+        (click)="navigateTo('classes')"
+      >
+        <span class="icon">▤</span><span>Classes</span>
+      </button>
+      <button
+        type="button"
+        class="nav-item"
+        [class.active]="config.title === 'Professors'"
+        (click)="navigateTo('professors')"
+      >
+        <span class="icon">♙</span><span>Professors</span>
+      </button>
+      <button
+        type="button"
+        class="nav-item"
+        [class.active]="config.title === 'Students'"
+        (click)="navigateTo('students')"
+      >
+        <span class="icon">♧</span><span>Students</span>
+      </button>
+      <button
+        type="button"
+        class="nav-item"
+        [class.active]="config.title === 'Subjects'"
+        (click)="navigateTo('subjects')"
+      >
+        <span class="icon">▣</span><span>Subjects</span>
+      </button>
+      <span class="nav-label">GRADES</span>
+      <button
+        type="button"
+        class="nav-item"
+        [class.active]="config.title === 'Grade Forms'"
+        (click)="navigateTo('grade-forms')"
+      >
+        <span class="icon">▤</span><span>Grade Forms</span>
+      </button>
+      <button
+        type="button"
+        class="nav-item"
+        [class.active]="config.title === 'Results'"
+        (click)="navigateTo('results')"
+      >
+        <span class="icon">▥</span><span>Results</span>
+      </button>
+      <div class="nav-spacer"></div>
+      <button
+        type="button"
+        class="nav-item"
+        [class.active]="config.title === 'Settings'"
+        (click)="navigateTo('settings')"
+      >
+        <span class="icon">⚙</span><span>Settings</span>
+      </button>
+      <button type="button" class="nav-item logout" (click)="logout()">
+        <span class="icon">↪</span><span>Logout</span>
+      </button>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <button type="button" class="menu-button" (click)="sidebarOpen = !sidebarOpen">☰</button>
+      <div class="topbar-user">
+        <b>A</b><span><strong>Administrator</strong><small>System Admin</small></span>
+      </div>
+    </header>
+    <section class="content">
+      <div class="intro">
+        <div>
+          <span class="eyebrow">{{ config.eyebrow }}</span>
+          <h1>{{ config.title }}</h1>
+          <p>{{ config.description }}</p>
+        </div>
+        <button type="button" class="primary-button" (click)="showForm = !showForm">
+          <span>+</span>{{ config.action }}
+        </button>
+      </div>
+
+      @if (showForm) {
+        <form class="add-form" (ngSubmit)="addRecord()">
+          <div class="form-title">
+            <span class="eyebrow">NEW RECORD</span>
+            <h2>Add {{ config.singular }}</h2>
+          </div>
+          <label
+            >{{ config.columns[0].label
+            }}<input
+              name="name"
+              [(ngModel)]="newName"
+              [placeholder]="'Enter ' + config.singular + ' name'" /></label
+          ><label
+            >{{ config.columns[1].label
+            }}<input name="detail" [(ngModel)]="newDetail" placeholder="Enter details" /></label
+          ><button type="submit" class="primary-button">Save</button
+          ><button type="button" class="cancel-button" (click)="showForm = false">Cancel</button>
+        </form>
+      }
+
+      <div class="metric-grid">
+        <article>
+          <i class="blue">▦</i><span>Total {{ config.title }}</span
+          ><strong>{{ rows.length }}</strong
+          ><small>Configured records</small>
+        </article>
+        <article>
+          <i class="green">✓</i><span>Active records</span><strong>{{ activeCount }}</strong
+          ><small>Ready to use</small>
+        </article>
+        <article>
+          <i class="purple">◷</i><span>Last updated</span><strong>Today</strong
+          ><small>Administration activity</small>
+        </article>
+      </div>
+
+      <section class="data-card">
+        <header>
+          <div>
+            <span class="eyebrow">MANAGEMENT</span>
+            <h2>All {{ config.title }}</h2>
+          </div>
+          <label class="search"
+            ><span>⌕</span><input [(ngModel)]="searchTerm" placeholder="Search records"
+          /></label>
+        </header>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                @for (column of config.columns; track column.key) {
+                  <th>{{ column.label }}</th>
+                }
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (row of filteredRows; track row.id) {
+                <tr>
+                  @for (column of config.columns; track column.key) {
+                    <td [class.status-cell]="column.key === 'status'">
+                      <span [class.status]="column.key === 'status'">{{ row[column.key] }}</span>
+                    </td>
+                  }
+                  <td><button type="button" class="more" aria-label="More options">•••</button></td>
+                </tr>
+              } @empty {
+                <tr>
+                  <td class="empty" [attr.colspan]="config.columns.length + 1">
+                    No {{ config.title.toLowerCase() }} match your search.
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+</div>

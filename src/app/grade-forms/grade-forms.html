@@ -1,0 +1,157 @@
+<div class="admin-module">
+  <app-admin-sidebar></app-admin-sidebar>
+
+  <main class="module-main">
+    <app-admin-topbar></app-admin-topbar>
+
+    <section class="module-content">
+      <div class="toolbar">
+        <div>
+          <h1>Grade Form Approvals</h1>
+          <p class="subtitle">
+            Review submitted grade forms and approve them before grades are published.
+          </p>
+        </div>
+        <button class="secondary refresh-button" type="button" (click)="refresh()">
+          Refresh forms
+        </button>
+      </div>
+
+      @if (notice) {
+        <p class="form-notice" role="status">{{ notice }}</p>
+      }
+      @if (error) {
+        <p class="form-error" role="alert">{{ error }}</p>
+      }
+
+      <section class="metric-grid">
+        <article class="card metric">
+          <span class="metric-icon" aria-hidden="true"
+            ><svg viewBox="0 0 24 24">
+              <path
+                d="M8 3.5h7l4 4v12.25A1.25 1.25 0 0 1 17.75 21h-10.5A1.25 1.25 0 0 1 6 19.75v-15A1.25 1.25 0 0 1 7.25 3.5H8Z"
+              />
+              <path d="M14.75 3.75V8h4M9 12h6M9 15.5h6" /></svg></span
+          ><strong>{{ totalForms }}</strong
+          ><span>Submitted forms</span>
+        </article>
+        <article class="card metric">
+          <span class="metric-icon" aria-hidden="true"
+            ><svg viewBox="0 0 24 24">
+              <path d="M12 3.5a8.5 8.5 0 1 1-8.5 8.5A8.5 8.5 0 0 1 12 3.5Z" />
+              <path d="M12 7v5l3.25 2" /></svg></span
+          ><strong>{{ pendingForms }}</strong
+          ><span>Pending approval</span>
+        </article>
+        <article class="card metric">
+          <span class="metric-icon" aria-hidden="true"
+            ><svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="8.5" />
+              <path d="m8.25 12.1 2.35 2.35 5.2-5.2" /></svg></span
+          ><strong>{{ approvedForms }}</strong
+          ><span>Approved forms</span>
+        </article>
+      </section>
+
+      <article class="card">
+        <header><h2>Submitted Grade Forms</h2></header>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Grade Form</th>
+                <th>Class</th>
+                <th>Submitted</th>
+                <th>Progress</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              @if (isLoading) {
+                <tr>
+                  <td class="empty-state" colspan="6">Loading submitted forms…</td>
+                </tr>
+              }
+              @for (gradeForm of gradeForms; track gradeForm.id) {
+                <tr>
+                  <td>{{ gradeForm.title }}</td>
+                  <td>{{ gradeForm.className }}</td>
+                  <td>{{ gradeForm.submitted }}</td>
+                  <td>{{ gradeForm.progress || 'Submitted for review' }}</td>
+                  <td>
+                    <span
+                      class="tag"
+                      [class.tag-pending]="gradeForm.status === 'Pending approval'"
+                      >{{ gradeForm.status }}</span
+                    >
+                  </td>
+                  <td>
+                    <button class="view-action" type="button" (click)="viewResults(gradeForm)">
+                      View results
+                    </button>
+                    @if (gradeForm.status === 'Pending approval') {
+                      <button
+                        class="approve-action"
+                        type="button"
+                        [disabled]="approvingId === gradeForm.id"
+                        (click)="approveGradeForm(gradeForm)"
+                      >
+                        {{ approvingId === gradeForm.id ? 'Approving…' : 'Approve' }}
+                      </button>
+                    } @else {
+                      <span class="muted">Approved</span>
+                    }
+                  </td>
+                </tr>
+              } @empty {
+                @if (!isLoading) {
+                  <tr>
+                    <td class="empty-state" colspan="6">No grade forms have been submitted yet.</td>
+                  </tr>
+                }
+              }
+            </tbody>
+          </table>
+        </div>
+      </article>
+      @if (viewingForm) {
+        <article class="card results-card">
+          <header>
+            <div>
+              <h2>{{ viewingForm.title }} — Student Results</h2>
+              <p>{{ viewingForm.className }} · {{ viewingForm.professor }}</p>
+            </div>
+            <button class="secondary" type="button" (click)="closeResults()">Close</button>
+          </header>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>Grade</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (grade of viewingForm.grades || []; track grade.studentId) {
+                  <tr>
+                    <td>{{ studentName(grade.studentId) }}</td>
+                    <td>
+                      <b class="result-score">{{ grade.score }} / 20</b>
+                    </td>
+                  </tr>
+                } @empty {
+                  <tr>
+                    <td class="empty-state" colspan="2">
+                      This older form does not contain individual student results.
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </article>
+      }
+    </section>
+  </main>
+</div>

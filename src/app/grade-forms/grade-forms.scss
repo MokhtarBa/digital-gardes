@@ -1,0 +1,57 @@
+@use '../admin-shared/admin-module';
+
+.metric:nth-child(2) .metric-icon {
+  background: #fff3e3;
+  color: #c66a05;
+}
+.metric:nth-child(3) .metric-icon {
+  background: #e8fbf3;
+  color: #0ca774;
+}
+.tag-pending {
+  background: #fff3e3;
+  color: #c66a05;
+}
+.refresh-button,
+.results-card .secondary {
+  background: #fff;
+  border: 1px solid #d5e0f0;
+  border-radius: 9px;
+  color: #2a5ec9;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 9px 12px;
+}
+.view-action {
+  margin-right: 8px;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  background: #eff6ff;
+  color: #1768da;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  padding: 7px 11px;
+}
+.results-card {
+  margin-top: 22px;
+}
+.results-card header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.results-card h2 {
+  margin: 0;
+}
+.results-card header p {
+  margin: 5px 0 0;
+  color: #758198;
+  font-size: 12px;
+}
+.result-score {
+  color: #128760;
+}

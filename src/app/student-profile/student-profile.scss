@@ -1,0 +1,77 @@
+@import '../student-shared/student-module.scss';
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 22px;
+  align-items: start;
+}
+.account-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 25px;
+}
+.profile-avatar {
+  display: grid;
+  width: 64px;
+  height: 64px;
+  place-items: center;
+  border-radius: 50%;
+  background: #dffbed;
+  color: #138c68;
+  font-size: 22px;
+  font-weight: 800;
+}
+.account-card h2 {
+  margin: 0;
+  font-size: 20px;
+}
+.account-card p,
+.password-card header p {
+  margin: 5px 0 10px;
+  color: #758198;
+  font-size: 13px;
+}
+.password-card header {
+  padding: 20px 22px;
+  border-bottom: 1px solid #eef1f6;
+}
+.password-fields {
+  display: grid;
+  gap: 15px;
+  padding: 22px;
+}
+.password-fields label {
+  display: grid;
+  gap: 7px;
+  color: #34415e;
+  font-size: 12px;
+  font-weight: 700;
+}
+.password-fields input {
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #dce3ee;
+  border-radius: 9px;
+  outline: 0;
+  font: inherit;
+}
+.password-fields input:focus {
+  border-color: #13986d;
+  box-shadow: 0 0 0 3px rgba(19, 152, 109, 0.12);
+}
+.password-card .form-error,
+.password-card .form-notice {
+  margin: 0 22px 16px;
+}
+.password-card footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 22px 22px;
+}
+@media (max-width: 850px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+}

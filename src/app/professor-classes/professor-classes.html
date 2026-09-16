@@ -1,0 +1,43 @@
+<div class="professor-module">
+  <app-professor-sidebar></app-professor-sidebar>
+  <main class="module-main">
+    <app-professor-topbar title="My Classes"></app-professor-topbar>
+    <section class="module-content">
+      <h1>My Classes</h1>
+      <p class="subtitle">These are the classes assigned to you by the administrator.</p>
+      @if (errorMessage) {
+        <p class="form-error">{{ errorMessage }}</p>
+      }
+      <section class="class-grid">
+        @for (classRecord of classes; track classRecord.id) {
+          <article class="class-card">
+            <span class="card-icon">▣</span>
+            <div>
+              <span class="status">{{ classRecord.status }}</span>
+              <h2>{{ classRecord.name }}</h2>
+              <p>{{ classRecord.academicYear }}</p>
+            </div>
+            <dl>
+              <div>
+                <dt>Enrolled students</dt>
+                <dd>{{ classRecord.students }}</dd>
+              </div>
+              <div>
+                <dt>Assigned professor</dt>
+                <dd>{{ classRecord.professor }}</dd>
+              </div>
+            </dl>
+          </article>
+        } @empty {
+          <article class="empty-card">
+            {{
+              isLoading
+                ? 'Loading assigned classes…'
+                : 'No class has been assigned to you yet. Ask an administrator to assign you a class.'
+            }}
+          </article>
+        }
+      </section>
+    </section>
+  </main>
+</div>

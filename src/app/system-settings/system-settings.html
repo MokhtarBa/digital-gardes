@@ -1,0 +1,214 @@
+<div class="admin-module">
+  <app-admin-sidebar></app-admin-sidebar>
+
+  <main class="module-main">
+    <app-admin-topbar></app-admin-topbar>
+
+    <section class="module-content">
+      <div class="toolbar">
+        <div>
+          <h1>System Settings</h1>
+          <p class="subtitle">
+            Configure the core preferences for the Digital Grades administration portal.
+          </p>
+        </div>
+        <button class="primary" type="submit" form="settings-form">
+          {{ notice ? 'Saved' : 'Save Changes' }}
+        </button>
+      </div>
+
+      @if (notice) {
+        <p class="form-notice" role="status">{{ notice }} {{ lastSaved }}.</p>
+      }
+
+      <form id="settings-form" (ngSubmit)="saveSettings()" novalidate>
+        <section class="settings-grid">
+          <article class="card settings-card">
+            <header>
+              <span class="section-icon blue">⌂</span>
+              <div>
+                <h2>University profile</h2>
+                <p>Details displayed across the portal.</p>
+              </div>
+            </header>
+            <div class="settings-fields">
+              <label
+                >University name<input
+                  name="institutionName"
+                  [(ngModel)]="institutionName"
+                  (ngModelChange)="clearSaveNotice()"
+                  required
+              /></label>
+              <label
+                >Official email<input
+                  type="email"
+                  name="institutionEmail"
+                  [(ngModel)]="institutionEmail"
+                  (ngModelChange)="clearSaveNotice()"
+                  required
+              /></label>
+              <label
+                >Phone number<input
+                  name="institutionPhone"
+                  [(ngModel)]="institutionPhone"
+                  (ngModelChange)="clearSaveNotice()"
+              /></label>
+              <label
+                >Address<input
+                  name="institutionAddress"
+                  [(ngModel)]="institutionAddress"
+                  (ngModelChange)="clearSaveNotice()"
+              /></label>
+            </div>
+          </article>
+
+          <article class="card settings-card">
+            <header>
+              <span class="section-icon purple">▣</span>
+              <div>
+                <h2>Academic year</h2>
+                <p>Set the active teaching period.</p>
+              </div>
+            </header>
+            <div class="settings-fields two-columns">
+              <label
+                >Academic year<input
+                  name="currentAcademicCycle"
+                  [(ngModel)]="currentAcademicCycle"
+                  (ngModelChange)="clearSaveNotice()"
+                  required
+              /></label>
+              <label
+                >Active semester<select
+                  name="currentSemester"
+                  [(ngModel)]="currentSemester"
+                  (ngModelChange)="clearSaveNotice()"
+                >
+                  <option>Semester 1</option>
+                  <option>Semester 2</option>
+                  <option>Summer session</option>
+                </select></label
+              >
+            </div>
+          </article>
+
+          <article class="card settings-card">
+            <header>
+              <span class="section-icon orange">✓</span>
+              <div>
+                <h2>Grade rules</h2>
+                <p>Control how grades are managed.</p>
+              </div>
+            </header>
+            <div class="settings-fields two-columns">
+              <label
+                >Grading scale<input
+                  name="gradingScale"
+                  [(ngModel)]="gradingScale"
+                  (ngModelChange)="clearSaveNotice()"
+                  required
+              /></label>
+              <label
+                >Passing grade<input
+                  type="number"
+                  min="0"
+                  name="passingGrade"
+                  [(ngModel)]="passingGrade"
+                  (ngModelChange)="clearSaveNotice()"
+                  required
+              /></label>
+            </div>
+            <label class="toggle-row"
+              ><span
+                ><b>Allow professors to edit grades</b
+                ><small>Before a grade form receives final approval.</small></span
+              ><input
+                type="checkbox"
+                name="allowGradeEditing"
+                [(ngModel)]="allowGradeEditing"
+                (ngModelChange)="clearSaveNotice()" /><i></i
+            ></label>
+          </article>
+
+          <article class="card settings-card">
+            <header>
+              <span class="section-icon green">♧</span>
+              <div>
+                <h2>Notifications</h2>
+                <p>Choose the alerts administrators receive.</p>
+              </div>
+            </header>
+            <label class="toggle-row"
+              ><span
+                ><b>Email notifications</b><small>Receive portal activity by email.</small></span
+              ><input
+                type="checkbox"
+                name="emailNotifications"
+                [(ngModel)]="emailNotifications"
+                (ngModelChange)="clearSaveNotice()" /><i></i
+            ></label>
+            <label class="toggle-row"
+              ><span
+                ><b>Grade approval alerts</b
+                ><small>Get notified when a professor submits a form.</small></span
+              ><input
+                type="checkbox"
+                name="approvalNotifications"
+                [(ngModel)]="approvalNotifications"
+                (ngModelChange)="clearSaveNotice()" /><i></i
+            ></label>
+          </article>
+        </section>
+        <div class="settings-actions">
+          <button class="primary" type="submit">Save all changes</button
+          ><span>{{ lastSaved }}</span>
+        </div>
+        @if (formError) {
+          <p class="form-error" role="alert">{{ formError }}</p>
+        }
+      </form>
+
+      <section class="card security-card">
+        <header>
+          <span class="section-icon red">⌑</span>
+          <div>
+            <h2>Security</h2>
+            <p>Change the password for the signed-in administrator account.</p>
+          </div>
+        </header>
+        <form class="password-form" (ngSubmit)="changePassword()" novalidate>
+          <label
+            >Current password<input
+              type="password"
+              name="currentPassword"
+              [(ngModel)]="currentPassword"
+              autocomplete="current-password"
+          /></label>
+          <label
+            >New password<input
+              type="password"
+              name="newPassword"
+              [(ngModel)]="newPassword"
+              autocomplete="new-password"
+          /></label>
+          <label
+            >Confirm new password<input
+              type="password"
+              name="confirmPassword"
+              [(ngModel)]="confirmPassword"
+              autocomplete="new-password"
+          /></label>
+          <button class="secondary" type="submit" [disabled]="isChangingPassword">
+            {{ isChangingPassword ? 'Updating…' : 'Update password' }}
+          </button>
+        </form>
+        @if (passwordError) {
+          <p class="form-error" role="alert">{{ passwordError }}</p>
+        }
+        @if (passwordNotice) {
+          <p class="form-notice" role="status">{{ passwordNotice }}</p>
+        }
+      </section>
+    </section>
+  </main>
+</div>

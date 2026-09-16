@@ -1,0 +1,240 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  color: #182239;
+  font-family: Inter, Arial, 'Segoe UI', sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
+.professor-module {
+  min-height: 100vh;
+  background: #eff6ff;
+}
+.module-main {
+  min-height: 100vh;
+  margin-left: var(--professor-sidebar-width, 230px);
+  transition: margin-left 0.22s ease;
+}
+.dashboard-content {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 34px 38px 48px;
+}
+.welcome {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+.welcome h1 {
+  margin: 0;
+  color: #172033;
+  font-size: 30px;
+  letter-spacing: -0.7px;
+}
+.welcome p {
+  margin: 8px 0 0;
+  color: #718096;
+  font-size: 15px;
+}
+.welcome a,
+.panel header a {
+  color: #2160df;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.welcome a {
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 3px 9px rgba(42, 59, 91, 0.1);
+}
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.summary-card {
+  position: relative;
+  display: grid;
+  gap: 7px;
+  min-height: 166px;
+  padding: 24px;
+  border: 1px solid #e4eaf2;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 3px 9px rgba(42, 59, 91, 0.11);
+}
+.summary-card small {
+  color: #708097;
+  font-size: 14px;
+}
+.summary-card strong {
+  color: #14203a;
+  font-size: 38px;
+  letter-spacing: -1px;
+}
+.summary-card p {
+  margin: 0;
+  color: #748098;
+  font-size: 12px;
+}
+.card-icon {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: grid;
+  width: 49px;
+  height: 49px;
+  place-items: center;
+  border-radius: 15px;
+  font-size: 25px;
+  font-weight: 700;
+}
+.blue .card-icon {
+  background: #eaf2ff;
+  color: #1561e7;
+}
+.green .card-icon {
+  background: #dffbed;
+  color: #11aa72;
+}
+.purple .card-icon {
+  background: #f0eaff;
+  color: #8650ef;
+}
+.content-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+.panel {
+  overflow: hidden;
+  border: 1px solid #e3e8ef;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 3px 9px rgba(42, 59, 91, 0.11);
+}
+.panel header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 22px;
+  border-bottom: 1px solid #eef1f6;
+}
+.panel h2 {
+  margin: 0;
+  color: #202b3d;
+  font-size: 17px;
+}
+.panel header p {
+  margin: 5px 0 0;
+  color: #778398;
+  font-size: 12px;
+}
+.class-list article,
+.form-list article {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 22px;
+  border-bottom: 1px solid #eff2f6;
+}
+.class-list article:last-child,
+.form-list article:last-child {
+  border-bottom: 0;
+}
+.class-icon {
+  display: grid;
+  width: 39px;
+  height: 39px;
+  flex: 0 0 39px;
+  place-items: center;
+  border-radius: 11px;
+  background: #eaf7ef;
+  color: #19aa6f;
+  font-size: 20px;
+}
+.class-list div,
+.form-list div {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+.class-list b,
+.form-list b {
+  overflow: hidden;
+  color: #303c55;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.class-list small,
+.form-list small {
+  color: #7c889c;
+  font-size: 11px;
+}
+.class-list em {
+  margin-left: auto;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #eaf9f2;
+  color: #159467;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+}
+.form-list article {
+  justify-content: space-between;
+}
+.form-list span {
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: #eaf9f2;
+  color: #159467;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.form-list span.pending {
+  background: #fff6df;
+  color: #b97900;
+}
+.empty {
+  margin: 0;
+  padding: 34px 22px;
+  color: #76839b;
+  font-size: 13px;
+  text-align: center;
+}
+@media (max-width: 900px) {
+  .module-main {
+    margin-left: 0;
+  }
+  .dashboard-content {
+    padding: 22px;
+  }
+  .summary-grid,
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 560px) {
+  .dashboard-content {
+    padding: 16px;
+  }
+  .welcome {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .welcome h1 {
+    font-size: 24px;
+  }
+  .summary-grid {
+    gap: 14px;
+  }
+}

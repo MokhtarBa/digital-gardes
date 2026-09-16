@@ -1,0 +1,160 @@
+<div class="professor-module">
+  <app-professor-sidebar></app-professor-sidebar>
+  <main class="module-main">
+    <app-professor-topbar title="Grade Forms"></app-professor-topbar>
+    <section class="module-content">
+      <h1>{{ editingFormId ? 'Edit Grade Form Draft' : 'Grade Forms' }}</h1>
+      <p class="subtitle">
+        Save a draft while you work, then submit it for administrator approval when it is ready.
+      </p>
+      <form class="card form-card" (ngSubmit)="saveDraft(true)">
+        <label
+          >Form title<input
+            name="title"
+            [(ngModel)]="title"
+            placeholder="Example: Midterm Exam" /></label
+        ><label
+          >Class<select name="classId" [(ngModel)]="classId" (ngModelChange)="prepareGrades()">
+            <option value="" disabled>Select an assigned class</option>
+            @for (classRecord of classes; track classRecord.id) {
+              <option [value]="classRecord.id">
+                {{ classRecord.name }} · {{ classRecord.students }} students
+              </option>
+            }
+          </select></label
+        >
+        @if (classId) {
+          <section class="grade-entry" aria-label="Enter student grades">
+            <h2>Enter grades out of 20</h2>
+            @for (student of selectedClassStudents; track student.id) {
+              <label>
+                <span
+                  ><b>{{ student.name }}</b
+                  ><small>{{ student.email }}</small></span
+                >
+                <input
+                  [name]="'grade-' + student.id"
+                  [(ngModel)]="gradeByStudentId[student.id]"
+                  type="number"
+                  min="0"
+                  max="20"
+                  step="0.25"
+                  placeholder="0–20"
+                  required
+                />
+              </label>
+            } @empty {
+              <p class="form-error">This class has no assigned student accounts yet.</p>
+            }
+          </section>
+        }
+        <div class="form-actions">
+          @if (editingFormId) {
+            <button class="secondary" type="button" (click)="cancelEdit()">Cancel edit</button>
+          }
+          <button class="secondary" type="button" [disabled]="isSubmitting" (click)="saveDraft()">
+            {{ isSubmitting ? 'Saving…' : editingFormId ? 'Save changes as draft' : 'Save draft' }}
+          </button>
+          <button class="primary" type="submit" [disabled]="isSubmitting">
+            {{ isSubmitting ? 'Submitting…' : editingFormId ? 'Save & submit for approval' : 'Save & submit for approval' }}
+          </button>
+        </div>
+      </form>
+      @if (errorMessage) {
+        <p class="form-error">{{ errorMessage }}</p>
+      }
+      @if (noticeMessage) {
+        <p class="form-notice">{{ noticeMessage }}</p>
+      }
+      <article class="card">
+        <header>
+          <h2>Grade Form History</h2>
+          <span class="muted">{{ forms.length }} total</span>
+        </header>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Form</th>
+                <th>Class</th>
+                <th>Progress</th>
+                <th>Submitted</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (form of forms; track form.id) {
+                <tr>
+                  <td>
+                    <b>{{ form.title }}</b>
+                  </td>
+                  <td>{{ form.className }}</td>
+                  <td>{{ form.progress || 'Submitted' }}</td>
+                  <td>{{ form.submitted }}</td>
+                  <td>
+                    <span
+                      class="tag"
+                      [class.tag-pending]="form.status === 'Pending approval'"
+                      [class.tag-draft]="form.status === 'Draft'"
+                      >{{ form.status }}</span
+                    >
+                  </td>
+                  <td class="table-actions">
+                    <button class="link-button" type="button" (click)="viewGrades(form)">
+                      View grades
+                    </button>
+                    @if (form.status === 'Draft') {
+                      <button class="link-button" type="button" (click)="editDraft(form)">
+                        Edit
+                      </button>
+                      <button
+                        class="link-button submit-link"
+                        type="button"
+                        [disabled]="submittingFormId === form.id"
+                        (click)="submitDraft(form)"
+                      >
+                        {{
+                          submittingFormId === form.id ? 'Submitting…' : 'Submit for Admin Approval'
+                        }}
+                      </button>
+                    }
+                  </td>
+                </tr>
+              } @empty {
+                <tr>
+                  <td class="empty-state" colspan="6">
+                    {{
+                      isLoading ? 'Loading grade forms…' : 'No saved or submitted grade forms yet.'
+                    }}
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </article>
+      @if (viewingForm) {
+        <article class="card grade-history">
+          <header>
+            <div>
+              <h2>{{ viewingForm.title }}</h2>
+              <p>{{ viewingForm.className }} · {{ viewingForm.status }}</p>
+            </div>
+            <button class="secondary" type="button" (click)="closeGradeHistory()">Close</button>
+          </header>
+          <div class="grade-history-list">
+            @for (grade of viewingForm.grades || []; track grade.studentId) {
+              <div>
+                <span>{{ studentName(grade.studentId) }}</span>
+                <b>{{ grade.score }} / 20</b>
+              </div>
+            } @empty {
+              <p class="muted">This older form does not contain individual grade details.</p>
+            }
+          </div>
+        </article>
+      }
+    </section>
+  </main>
+</div>

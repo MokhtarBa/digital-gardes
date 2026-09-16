@@ -1,0 +1,229 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  font-family: Inter, Arial, 'Segoe UI', sans-serif;
+  color: #17213a;
+}
+* {
+  box-sizing: border-box;
+}
+button {
+  font: inherit;
+}
+
+.role-login {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 60px 28px;
+  background: #fff;
+}
+.login-card {
+  width: min(100%, 1000px);
+  text-align: center;
+}
+.login-card header .logo {
+  display: none;
+}
+.login-card h1 {
+  margin: 0;
+  color: #172033;
+  font-size: 43px;
+  letter-spacing: -1.25px;
+  line-height: 1.1;
+}
+.login-card header p {
+  margin: 13px 0 46px;
+  color: #778196;
+  font-size: 19px;
+}
+.role-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+.role {
+  display: flex;
+  min-height: 382px;
+  flex-direction: column;
+  align-items: center;
+  padding: 35px 28px 28px;
+  border: 1.5px solid #e2e8f1;
+  border-radius: 20px;
+  background: #fff;
+  color: #1e293b;
+  cursor: pointer;
+  box-shadow: 0 9px 22px rgba(32, 54, 93, 0.055);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+.role:hover,
+.role.selected {
+  transform: translateY(-4px);
+  border-color: #91b1ff;
+  box-shadow: 0 16px 32px rgba(50, 99, 225, 0.15);
+}
+.role-icon {
+  display: grid;
+  width: 100px;
+  height: 100px;
+  place-items: center;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  background: #edf3ff;
+  color: #3167e8;
+}
+.role-icon svg {
+  width: 45px;
+  height: 45px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+.student .role-icon {
+  background: #eafaf3;
+  color: #1aa674;
+}
+.role strong {
+  font-size: 24px;
+  letter-spacing: -0.4px;
+}
+.role small {
+  min-height: 56px;
+  margin-top: 12px;
+  color: #69758a;
+  font-size: 17px;
+  line-height: 1.45;
+}
+.role em {
+  width: 100%;
+  margin-top: auto;
+  padding: 16px 8px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #386cf1, #2859d8);
+  box-shadow: 0 8px 15px rgba(43, 94, 219, 0.18);
+  color: #fff;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 750;
+}
+.student em {
+  background: linear-gradient(135deg, #28ba87, #189b6d);
+}
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 19px;
+  margin: 33px 0 20px;
+}
+.divider span {
+  flex: 1;
+  height: 1px;
+  background: #dfe5ed;
+}
+.divider small {
+  color: #98a1af;
+  font-size: 16px;
+}
+.admin-access {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  color: #071b67;
+  text-decoration: none;
+  text-align: left;
+}
+.admin-icon {
+  display: grid;
+  width: 51px;
+  height: 51px;
+  flex: 0 0 51px;
+  place-items: center;
+  border-radius: 50%;
+  background: #eff4ff;
+  color: #3167e8;
+}
+.admin-icon svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.9;
+}
+.admin-access > span:last-child {
+  display: grid;
+  gap: 4px;
+  color: #677388;
+  font-size: 15px;
+}
+.admin-access strong {
+  color: #2f65df;
+  font-size: 17px;
+}
+
+@media (max-width: 900px) {
+  .login-card {
+    max-width: 760px;
+  }
+  .login-card h1 {
+    font-size: 35px;
+  }
+  .login-card header p {
+    margin-bottom: 32px;
+    font-size: 17px;
+  }
+  .role {
+    min-height: 320px;
+    padding: 28px 20px 20px;
+  }
+  .role-icon {
+    width: 78px;
+    height: 78px;
+    margin-bottom: 14px;
+  }
+  .role-icon svg {
+    width: 35px;
+    height: 35px;
+  }
+  .role strong {
+    font-size: 20px;
+  }
+  .role small {
+    min-height: 48px;
+    font-size: 14px;
+  }
+  .role em {
+    padding: 13px 5px;
+    font-size: 14px;
+  }
+}
+@media (max-width: 620px) {
+  .role-login {
+    padding: 40px 20px;
+  }
+  .role-options {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .role {
+    min-height: 285px;
+  }
+  .login-card h1 {
+    font-size: 31px;
+  }
+  .login-card header p {
+    font-size: 16px;
+  }
+  .divider {
+    margin-top: 25px;
+  }
+  .admin-access > span:last-child {
+    font-size: 13px;
+  }
+}

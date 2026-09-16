@@ -1,0 +1,60 @@
+<div class="professor-module student-module">
+  <app-student-sidebar></app-student-sidebar>
+  <main class="module-main">
+    <app-student-topbar title="Profile"></app-student-topbar>
+    <section class="module-content">
+      <h1>My Profile</h1>
+      <p class="subtitle">Review your account details and keep your password secure.</p>
+      <section class="profile-grid">
+        <article class="card account-card">
+          <span class="profile-avatar">{{ account.initials }}</span>
+          <div>
+            <h2>{{ account.name }}</h2>
+            <p>{{ account.email }}</p>
+            <span class="tag">Student account</span>
+          </div>
+        </article>
+        <form class="card password-card" (ngSubmit)="changePassword()">
+          <header>
+            <div>
+              <h2>Change Password</h2>
+              <p>Choose a password with at least 6 characters.</p>
+            </div>
+          </header>
+          <div class="password-fields">
+            <label
+              >Current password<input
+                name="currentPassword"
+                type="password"
+                [(ngModel)]="currentPassword"
+                autocomplete="current-password" /></label
+            ><label
+              >New password<input
+                name="newPassword"
+                type="password"
+                [(ngModel)]="newPassword"
+                autocomplete="new-password" /></label
+            ><label
+              >Confirm new password<input
+                name="confirmPassword"
+                type="password"
+                [(ngModel)]="confirmPassword"
+                autocomplete="new-password"
+            /></label>
+          </div>
+          @if (errorMessage) {
+            <p class="form-error">{{ errorMessage }}</p>
+          }
+          @if (noticeMessage) {
+            <p class="form-notice">{{ noticeMessage }}</p>
+          }
+          <footer>
+            <button class="primary" type="submit" [disabled]="isSaving">
+              {{ isSaving ? 'Updating…' : 'Update Password' }}
+            </button>
+          </footer>
+        </form>
+      </section>
+    </section>
+  </main>
+</div>

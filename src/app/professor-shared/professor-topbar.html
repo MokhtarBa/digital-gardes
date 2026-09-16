@@ -1,0 +1,31 @@
+<header class="topbar">
+  <button class="menu-button" type="button" (click)="layout.toggleSidebar()">
+    <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+  </button>
+  @if (title()) {
+    <h1>{{ title() }}</h1>
+  }
+  <div class="topbar-actions">
+    <button class="notification" type="button" aria-label="Notifications">
+      <svg viewBox="0 0 24 24">
+        <path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" />
+      </svg>
+    </button>
+    <div class="profile-wrap">
+      <button class="profile-button" type="button" (click)="profileOpen = !profileOpen">
+        <span class="avatar">{{ account.initials }}</span
+        ><span class="profile"
+          ><strong>{{ account.name }}</strong
+          ><small>Professor</small></span
+        >
+      </button>
+      @if (profileOpen) {
+        <section class="profile-menu">
+          <b>{{ account.name }}</b
+          ><small>{{ account.email }}</small
+          ><button type="button" (click)="signOut()">Sign out</button>
+        </section>
+      }
+    </div>
+  </div>
+</header>

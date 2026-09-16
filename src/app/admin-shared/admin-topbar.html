@@ -1,0 +1,92 @@
+<header class="topbar">
+  <button
+    class="menu-button"
+    type="button"
+    [attr.aria-label]="layout.collapsed() ? 'Expand navigation menu' : 'Collapse navigation menu'"
+    [attr.aria-expanded]="!layout.collapsed()"
+    (click)="layout.toggleSidebar()"
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+  </button>
+  @if (title()) {
+    <h1>{{ title() }}</h1>
+  }
+
+  <div class="topbar-actions">
+    <div class="topbar-menu">
+      <button
+        class="notification-button"
+        type="button"
+        [attr.aria-label]="'View ' + unreadCount + ' notifications'"
+        (click)="toggleNotifications()"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" />
+        </svg>
+        @if (unreadCount) {
+          <b>{{ unreadCount }}</b>
+        }
+      </button>
+      @if (notificationsOpen) {
+        <section class="dropdown notification-menu" aria-label="Notifications">
+          <header>
+            <strong>Notifications</strong
+            ><button type="button" (click)="markNotificationsRead()">Mark all read</button>
+          </header>
+          @for (notification of notifications; track notification.id) {
+            <article [class.unread]="notification.unread">
+              <span
+                class="notice-icon"
+                [class.blue]="notification.tone === 'blue'"
+                [class.green]="notification.tone === 'green'"
+                [class.purple]="notification.tone === 'purple'"
+                >{{
+                  notification.tone === 'purple' ? '✓' : notification.tone === 'green' ? '+' : '↗'
+                }}</span
+              >
+              <span
+                ><b>{{ notification.title }}</b
+                ><small>{{ notification.detail }}</small
+                ><em>{{ notification.time }}</em></span
+              >
+            </article>
+          } @empty {
+            <p class="empty-notifications">No new notifications.</p>
+          }
+        </section>
+      }
+    </div>
+
+    <div class="topbar-menu">
+      <button
+        class="profile-button"
+        type="button"
+        [attr.aria-expanded]="profileOpen"
+        aria-label="Open administrator profile"
+        (click)="toggleProfile()"
+      >
+        <span class="avatar">{{ accountInitials }}</span>
+        <span class="profile"
+          ><strong>{{ accountName }}</strong
+          ><small>Administrator</small></span
+        >
+        <svg class="profile-chevron" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="m4 6 4 4 4-4" />
+        </svg>
+      </button>
+      @if (profileOpen) {
+        <section class="dropdown profile-menu" aria-label="Administrator account menu">
+          <div class="profile-summary">
+            <span class="avatar">{{ accountInitials }}</span
+            ><span
+              ><b>{{ accountName }}</b
+              ><small>{{ accountEmail }}</small></span
+            >
+          </div>
+          <button type="button" (click)="openSettings()"><span>⚙</span>Change password</button>
+          <button class="sign-out" type="button" (click)="signOut()"><span>↪</span>Sign out</button>
+        </section>
+      }
+    </div>
+  </div>
+</header>

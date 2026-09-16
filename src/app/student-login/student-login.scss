@@ -1,0 +1,32 @@
+@import '../professor-login/professor-login.scss';
+
+.student-login {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: 43.2% 56.8%;
+  overflow: hidden;
+  background: #fff;
+}
+.student-login .portal-panel {
+  background:
+    radial-gradient(circle at 24% 19%, rgba(68, 193, 148, 0.28), transparent 30%),
+    linear-gradient(145deg, #123d48 0%, #07362f 47%, #13a77a 135%);
+}
+.student-login .hero-mark {
+  background: rgba(91, 170, 146, 0.34);
+}
+.student-login .access-chip {
+  color: #138c68;
+}
+.student-login .submit,
+.student-login .submit:disabled {
+  background: linear-gradient(90deg, #1aac7d, #13986d);
+}
+.student-login .submit:hover:not(:disabled) {
+  background: #0c845d;
+}
+@media (max-width: 820px) {
+  .student-login {
+    grid-template-columns: 1fr;
+  }
+}

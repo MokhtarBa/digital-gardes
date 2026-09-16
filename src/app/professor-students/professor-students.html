@@ -1,0 +1,51 @@
+<div class="professor-module">
+  <app-professor-sidebar></app-professor-sidebar>
+  <main class="module-main">
+    <app-professor-topbar title="My Students"></app-professor-topbar>
+    <section class="module-content">
+      <h1>My Students</h1>
+      <p class="subtitle">Students assigned by the administrator to your classes.</p>
+      @if (errorMessage) {
+        <p class="form-error">{{ errorMessage }}</p>
+      }
+      <article class="card">
+        <header>
+          <h2>Assigned Students</h2>
+          <span class="muted">{{ students.length }} students</span>
+        </header>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Email</th>
+                <th>Class</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (student of students; track student.id) {
+                <tr>
+                  <td>
+                    <b>{{ student.name }}</b>
+                  </td>
+                  <td>{{ student.email }}</td>
+                  <td>{{ student.className }}</td>
+                </tr>
+              } @empty {
+                <tr>
+                  <td class="empty-state" colspan="3">
+                    {{
+                      isLoading
+                        ? 'Loading your students…'
+                        : 'No students have been assigned to your classes yet.'
+                    }}
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+  </main>
+</div>

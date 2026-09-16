@@ -1,0 +1,85 @@
+<div class="professor-module">
+  <app-professor-sidebar></app-professor-sidebar>
+  <main class="module-main">
+    <app-professor-topbar title="Dashboard"></app-professor-topbar>
+    <section class="dashboard-content">
+      <header class="welcome">
+        <div>
+          <h1>Welcome back, {{ summary.professor.name }}</h1>
+          <p>Here is a live overview of your teaching activity.</p>
+        </div>
+        <a routerLink="/professor-grade-forms">Submit a grade form</a>
+      </header>
+      <section class="summary-grid">
+        <article class="summary-card blue">
+          <span class="card-icon">▤</span><small>Assigned Classes</small
+          ><strong>{{ summary.assignedClasses.length }}</strong>
+          <p>Classes you can manage</p>
+        </article>
+        <article class="summary-card green">
+          <span class="card-icon">◉</span><small>Students</small
+          ><strong>{{ summary.totalStudents }}</strong>
+          <p>Across your assigned classes</p>
+        </article>
+        <article class="summary-card purple">
+          <span class="card-icon">✓</span><small>Approved Forms</small
+          ><strong>{{ summary.approvedForms }}</strong>
+          <p>{{ summary.pendingForms }} awaiting approval</p>
+        </article>
+      </section>
+      <section class="content-grid">
+        <article class="panel">
+          <header>
+            <div>
+              <h2>My Classes</h2>
+              <p>Classes assigned by the administrator</p>
+            </div>
+            <a routerLink="/professor-classes">View all</a>
+          </header>
+          <div class="class-list">
+            @for (classRecord of summary.assignedClasses; track classRecord.id) {
+              <article>
+                <span class="class-icon">▣</span>
+                <div>
+                  <b>{{ classRecord.name }}</b
+                  ><small
+                    >{{ classRecord.academicYear }} · {{ classRecord.students }} students</small
+                  >
+                </div>
+                <em>{{ classRecord.status }}</em>
+              </article>
+            } @empty {
+              <p class="empty">
+                {{ isLoading ? 'Loading your classes…' : 'No class has been assigned to you yet.' }}
+              </p>
+            }
+          </div>
+        </article>
+        <article class="panel">
+          <header>
+            <div>
+              <h2>Grade Forms</h2>
+              <p>Forms you submitted for review</p>
+            </div>
+            <a routerLink="/professor-grade-forms">Manage</a>
+          </header>
+          <div class="form-list">
+            @for (form of summary.gradeForms; track form.id) {
+              <article>
+                <div>
+                  <b>{{ form.title }}</b
+                  ><small>{{ form.className }} · {{ form.progress || 'Submitted' }}</small>
+                </div>
+                <span [class.pending]="form.status === 'Pending approval'">{{ form.status }}</span>
+              </article>
+            } @empty {
+              <p class="empty">
+                {{ isLoading ? 'Loading your forms…' : 'You have not submitted a grade form yet.' }}
+              </p>
+            }
+          </div>
+        </article>
+      </section>
+    </section>
+  </main>
+</div>

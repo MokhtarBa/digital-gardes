@@ -1,0 +1,38 @@
+@import '../professor-dashboard/professor-dashboard.scss';
+
+.student-module {
+  background: #effbf6;
+}
+.welcome a,
+.panel header a {
+  color: #138c68;
+}
+.welcome a {
+  background: #eafaf3;
+}
+.blue .card-icon {
+  background: #e5f9f0;
+  color: #149c70;
+}
+.green .card-icon {
+  background: #dffbed;
+  color: #11aa72;
+}
+.result-mark {
+  display: grid;
+  width: 39px;
+  height: 39px;
+  place-items: center;
+  border-radius: 11px;
+  background: #eafaf3;
+  color: #148b66;
+  font-size: 14px;
+  font-weight: 800;
+}
+.form-list article em {
+  margin-left: auto;
+  color: #148b66;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 700;
+}

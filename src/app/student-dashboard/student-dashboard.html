@@ -1,0 +1,96 @@
+<div class="professor-module student-module">
+  <app-student-sidebar></app-student-sidebar>
+  <main class="module-main">
+    <app-student-topbar title="Dashboard"></app-student-topbar>
+    <section class="dashboard-content">
+      <header class="welcome">
+        <div>
+          <h1>Welcome back, {{ summary.student.name }}</h1>
+          <p>Your personal academic overview is up to date.</p>
+        </div>
+        <a routerLink="/student-grades">View my grades</a>
+      </header>
+      <section class="summary-grid">
+        <article class="summary-card blue">
+          <span class="card-icon">▣</span><small>My Classes</small
+          ><strong>{{ summary.classes.length }}</strong>
+          <p>
+            {{ summary.classes.length ? 'Classes assigned by admin' : 'No class assigned yet' }}
+          </p>
+        </article>
+        <article class="summary-card green">
+          <span class="card-icon">✓</span><small>Approved Results</small
+          ><strong>{{ summary.grades.length }}</strong>
+          <p>Published by your professor</p>
+        </article>
+        <article class="summary-card purple">
+          <span class="card-icon">◎</span><small>Overall Average</small
+          ><strong>{{ summary.overallAverage ?? '—' }}</strong>
+          <p>Out of 20</p>
+        </article>
+      </section>
+      <section class="content-grid">
+        <article class="panel">
+          <header>
+            <div>
+              <h2>Recent Grades</h2>
+              <p>Only approved results are shown here</p>
+            </div>
+            <a routerLink="/student-grades">View all</a>
+          </header>
+          <div class="form-list">
+            @for (grade of summary.grades; track grade.id) {
+              <article>
+                <span class="result-mark">{{ grade.score }}</span>
+                <div>
+                  <b>{{ grade.title }}</b
+                  ><small>{{ grade.className }} · {{ grade.professor }}</small>
+                </div>
+                <em>{{ resultLabel(grade.score) }}</em>
+              </article>
+            } @empty {
+              <p class="empty">
+                {{
+                  isLoading
+                    ? 'Loading your approved results…'
+                    : 'No approved grades have been published yet.'
+                }}
+              </p>
+            }
+          </div>
+        </article>
+        <article class="panel">
+          <header>
+            <div>
+              <h2>My Classes</h2>
+              <p>Assigned by your administrator</p>
+            </div>
+            <a routerLink="/student-classes">Details</a>
+          </header>
+          <div class="class-list">
+            @for (classRecord of summary.classes; track classRecord.id) {
+              <article>
+                <span class="class-icon">▣</span>
+                <div>
+                  <b>{{ classRecord.name }}</b
+                  ><small
+                    >{{ classRecord.academicYear }} · {{ classRecord.students }} students</small
+                  >
+                </div>
+                <em>{{ classRecord.status }}</em>
+              </article>
+            } @empty {
+              <p class="empty">
+                {{
+                  isLoading
+                    ? 'Loading your classes…'
+                    : 'You have not been assigned to any classes yet.'
+                }}
+              </p>
+            }
+          </div>
+        </article>
+      </section>
+    </section>
+  </main>
+</div>

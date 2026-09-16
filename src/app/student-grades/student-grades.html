@@ -1,0 +1,61 @@
+<div class="professor-module student-module">
+  <app-student-sidebar></app-student-sidebar>
+  <main class="module-main">
+    <app-student-topbar title="My Grades"></app-student-topbar>
+    <section class="module-content">
+      <h1>My Grades</h1>
+      <p class="subtitle">Only results approved by the administrator are published here.</p>
+      @if (errorMessage) {
+        <p class="form-error">{{ errorMessage }}</p>
+      }
+      <article class="card">
+        <header>
+          <h2>Approved Results</h2>
+          <span class="muted">{{ grades.length }} results</span>
+        </header>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Assessment</th>
+                <th>Class</th>
+                <th>Professor</th>
+                <th>Grade</th>
+                <th>Result</th>
+                <th>Published</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (grade of grades; track grade.id) {
+                <tr>
+                  <td>
+                    <b>{{ grade.title }}</b>
+                  </td>
+                  <td>{{ grade.className }}</td>
+                  <td>{{ grade.professor }}</td>
+                  <td>
+                    <b class="score">{{ grade.score }} / {{ grade.maximumScore }}</b>
+                  </td>
+                  <td>
+                    <span class="tag">{{ gradeLabel(grade.score) }}</span>
+                  </td>
+                  <td>{{ grade.submitted }}</td>
+                </tr>
+              } @empty {
+                <tr>
+                  <td class="empty-state" colspan="6">
+                    {{
+                      isLoading
+                        ? 'Loading your grades…'
+                        : 'No approved grades have been published for you yet.'
+                    }}
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+  </main>
+</div>

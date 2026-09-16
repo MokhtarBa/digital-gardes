@@ -1,0 +1,198 @@
+:host {
+  display: contents;
+}
+
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  width: var(--admin-sidebar-width, 230px);
+  padding: 24px 12px 22px;
+  background: linear-gradient(180deg, #172c5e 0%, #122652 100%);
+  box-shadow: 4px 0 20px rgba(19, 47, 111, 0.16);
+  color: #fff;
+  transition:
+    width 0.22s ease,
+    transform 0.22s ease;
+}
+
+.brand {
+  display: flex;
+  min-height: 80px;
+  align-items: center;
+  gap: 13px;
+  padding: 0 12px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  color: #fff;
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  place-items: center;
+  border-radius: 13px;
+  background: #1261e9;
+}
+
+.brand-mark svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.brand b {
+  font-size: 18px;
+  letter-spacing: -0.35px;
+}
+
+.brand small {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+.nav-label {
+  margin: 28px 12px 12px;
+  color: rgba(202, 214, 240, 0.46);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.sidebar nav {
+  display: grid;
+  gap: 8px;
+  margin-top: 0;
+}
+
+.sidebar a,
+.sidebar .logout {
+  display: flex;
+  min-height: 50px;
+  align-items: center;
+  gap: 13px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 12px;
+  color: rgba(234, 240, 252, 0.67);
+  font-size: 15px;
+  text-decoration: none;
+  transition:
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  background: #1461e9;
+  color: #fff;
+}
+
+.sidebar nav a:hover {
+  transform: translateX(1px);
+}
+
+.nav-icon {
+  width: 21px;
+  height: 21px;
+  flex: 0 0 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.nav-chevron {
+  width: 13px;
+  height: 13px;
+  margin-left: auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+  opacity: 0.8;
+}
+
+.logout {
+  margin-top: auto;
+  min-height: 50px;
+  padding-left: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0 !important;
+  background: transparent;
+  color: #ff8293 !important;
+  cursor: pointer;
+  font: inherit;
+}
+
+.logout:hover {
+  background: rgba(255, 127, 145, 0.16) !important;
+  color: #fff0f2 !important;
+}
+
+.logout:focus-visible {
+  outline: 2px solid #ff9dab;
+  outline-offset: -3px;
+}
+
+.sidebar.collapsed {
+  padding-right: 12px;
+  padding-left: 12px;
+}
+.sidebar.collapsed .brand {
+  min-height: 80px;
+  justify-content: center;
+  padding-right: 0;
+  padding-left: 0;
+}
+.sidebar.collapsed .brand b,
+.sidebar.collapsed .nav-label,
+.sidebar.collapsed nav a > span,
+.sidebar.collapsed .logout > span,
+.sidebar.collapsed .nav-chevron {
+  display: none;
+}
+.sidebar.collapsed a,
+.sidebar.collapsed .logout {
+  justify-content: center;
+  padding-right: 0;
+  padding-left: 0;
+}
+.sidebar.collapsed .logout {
+  padding-right: 0;
+  padding-left: 0;
+}
+.sidebar-backdrop {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 230px;
+    transform: translateX(-100%);
+  }
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+  .sidebar-backdrop {
+    position: fixed;
+    z-index: 2;
+    inset: 0;
+    display: block;
+    border: 0;
+    background: rgba(10, 24, 58, 0.38);
+  }
+}

@@ -1,0 +1,22 @@
+@import '../professor-shared/professor-topbar.scss';
+
+.topbar {
+  border-bottom: 0;
+  background: linear-gradient(105deg, #0d906b 0%, #19ac7b 54%, #21b790 100%);
+  box-shadow: 0 2px 8px rgba(14, 132, 99, 0.15);
+}
+.topbar h1,
+.menu-button,
+.profile-button,
+.profile strong,
+.profile small {
+  color: #fff;
+}
+.menu-button:hover,
+.profile-button:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+.avatar {
+  background: #fff;
+  color: #138c68;
+}

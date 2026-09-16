@@ -1,0 +1,595 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  font-family: Inter, Arial, 'Segoe UI', sans-serif;
+  color: #182239;
+}
+* {
+  box-sizing: border-box;
+}
+.admin-module {
+  min-height: 100vh;
+  background: #eff6ff;
+}
+.module-main {
+  min-height: 100vh;
+  margin-left: var(--admin-sidebar-width, 230px);
+  transition: margin-left 0.22s ease;
+}
+.dashboard-content {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 42px 42px 58px;
+}
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+.summary-card {
+  display: flex;
+  min-height: 190px;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 31px 34px;
+  border: 1px solid #e4eaf2;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 3px 8px rgba(42, 59, 91, 0.14);
+}
+.summary-card div {
+  display: grid;
+  gap: 10px;
+}
+.summary-card span {
+  color: #69768c;
+  font-size: 21px;
+}
+.summary-card strong {
+  color: #111a2d;
+  font-size: 52px;
+  letter-spacing: -1.6px;
+  line-height: 1;
+}
+.summary-card small {
+  margin-top: 14px;
+  color: #19be80;
+  font-size: 17px;
+}
+.summary-card i {
+  display: grid;
+  width: 78px;
+  height: 78px;
+  place-items: center;
+  border-radius: 24px;
+  font-style: normal;
+}
+.summary-card svg {
+  width: 41px;
+  height: 41px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.75;
+}
+.blue i {
+  background: #eaf2ff;
+  color: #1561e7;
+}
+.purple i {
+  background: #f0eaff;
+  color: #8650ef;
+}
+.green i {
+  background: #dffbed;
+  color: #11bb79;
+}
+.orange i {
+  background: #fff0dc;
+  color: #ed8611;
+}
+.analytics-grid {
+  display: grid;
+  grid-template-columns: 1.9fr 0.92fr;
+  gap: 28px;
+  margin-top: 40px;
+}
+.panel {
+  overflow: hidden;
+  border: 1px solid #e5e9f0;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 3px 8px rgba(42, 59, 91, 0.14);
+}
+.panel header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 42px 44px 0;
+}
+.panel h2 {
+  margin: 0;
+  color: #182238;
+  font-size: 28px;
+  letter-spacing: -0.6px;
+}
+.panel header p {
+  margin: 11px 0 0;
+  color: #778398;
+  font-size: 20px;
+}
+.statistics-panel header b {
+  color: #16bb7b;
+  font-size: 18px;
+}
+.line-chart {
+  position: relative;
+  height: 328px;
+  margin: 36px 50px 0 102px;
+}
+.chart-grid {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(to bottom, transparent 0 65px, #edf0f5 66px 68px),
+    repeating-linear-gradient(to right, transparent 0 16.1%, #edf0f5 16.25% 16.5%);
+}
+.student-line,
+.submission-line {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  transform-origin: left;
+}
+.student-line {
+  top: 37%;
+  background: #1261e9;
+  transform: rotate(-3deg);
+}
+.submission-line {
+  top: 89%;
+  border-top: 4px dashed #8753ef;
+  transform: rotate(-0.5deg);
+}
+.line-chart i {
+  position: absolute;
+  display: block;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #1261e9;
+}
+.line-chart .one {
+  left: 0;
+  top: 35%;
+}
+.line-chart .two {
+  left: 16.5%;
+  top: 32%;
+}
+.line-chart .three {
+  left: 33%;
+  top: 30%;
+}
+.line-chart .four {
+  left: 49.5%;
+  top: 28%;
+}
+.line-chart .five {
+  left: 66%;
+  top: 26%;
+}
+.line-chart .six {
+  left: 82.5%;
+  top: 24%;
+}
+.line-chart .seven {
+  right: 0;
+  top: 23%;
+}
+.chart-months {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 50px 0 102px;
+  color: #929bad;
+  font-size: 16px;
+}
+.chart-key {
+  display: flex;
+  justify-content: center;
+  gap: 26px;
+  margin: 40px 0 34px;
+  color: #1462e7;
+  font-size: 17px;
+}
+.chart-key span:last-child {
+  color: #8753ef;
+}
+.distribution-panel header {
+  display: block;
+}
+.distribution-panel header p {
+  font-size: 19px;
+}
+.donut {
+  display: grid;
+  width: 268px;
+  height: 268px;
+  margin: 38px auto 28px;
+  place-items: center;
+  border-radius: 50%;
+  background: conic-gradient(
+    #17bd80 0 22%,
+    #f34848 22% 29%,
+    #fc781a 29% 42%,
+    #fb9d08 42% 67%,
+    #1261e9 67%
+  );
+}
+.donut span {
+  width: 158px;
+  height: 158px;
+  border-radius: 50%;
+  background: #fff;
+}
+.distribution-panel ul {
+  display: grid;
+  gap: 13px;
+  margin: 0 48px 40px;
+  padding: 0;
+  list-style: none;
+  color: #5c687d;
+  font-size: 17px;
+}
+.distribution-panel li {
+  display: grid;
+  grid-template-columns: 14px 1fr auto;
+  align-items: center;
+  gap: 11px;
+}
+.distribution-panel li i {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+.distribution-panel li b {
+  color: #4f5b70;
+}
+.excellent {
+  background: #17bd80;
+}
+.good {
+  background: #1261e9;
+}
+.average {
+  background: #fb9d08;
+}
+.below {
+  background: #fc781a;
+}
+.fail {
+  background: #f34848;
+}
+.live-stat-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding: 36px 44px 42px;
+}
+.live-stat-list div {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+  border: 1px solid #e7edf5;
+  border-radius: 14px;
+  background: #f9fbff;
+}
+.live-stat-list span {
+  color: #6e7a90;
+  font-size: 15px;
+}
+.live-stat-list b {
+  color: #1c2a44;
+  font-size: 30px;
+}
+.grade-empty {
+  display: grid;
+  min-height: 320px;
+  place-content: center;
+  justify-items: center;
+  gap: 10px;
+  padding: 30px;
+  color: #78859a;
+  text-align: center;
+}
+.grade-empty span {
+  display: grid;
+  width: 64px;
+  height: 64px;
+  place-items: center;
+  border-radius: 50%;
+  background: #edf3ff;
+  color: #2d65e5;
+  font-size: 34px;
+}
+.grade-empty b {
+  color: #31405a;
+  font-size: 18px;
+}
+.grade-empty p {
+  max-width: 240px;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.activity-panel {
+  margin-top: 40px;
+}
+.activity-panel header {
+  min-height: 98px;
+  padding: 0 44px;
+  border-bottom: 1px solid #e9edf3;
+}
+.activity-panel header button {
+  border: 0;
+  background: transparent;
+  color: #1261e9;
+  cursor: pointer;
+  font-size: 19px;
+  font-weight: 700;
+}
+.activity-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 5px;
+  padding: 20px 44px;
+  border-bottom: 1px solid #eef1f5;
+  color: #344057;
+  font-size: 17px;
+}
+.activity-row small {
+  grid-column: 1;
+  color: #8791a2;
+}
+.activity-row time {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  color: #8791a2;
+}
+@media (max-width: 1200px) {
+  .summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .dashboard-content {
+    padding: 30px;
+  }
+  .summary-card {
+    min-height: 150px;
+    padding: 24px;
+  }
+  .summary-card span {
+    font-size: 17px;
+  }
+  .summary-card strong {
+    font-size: 42px;
+  }
+  .summary-card i {
+    width: 60px;
+    height: 60px;
+  }
+  .summary-card svg {
+    width: 31px;
+    height: 31px;
+  }
+  .analytics-grid {
+    grid-template-columns: 1.55fr 1fr;
+  }
+  .panel header {
+    padding: 28px 30px 0;
+  }
+  .panel h2 {
+    font-size: 23px;
+  }
+  .panel header p {
+    font-size: 16px;
+  }
+  .line-chart {
+    margin-left: 48px;
+  }
+  .chart-months {
+    margin-left: 48px;
+  }
+  .donut {
+    width: 210px;
+    height: 210px;
+  }
+  .donut span {
+    width: 124px;
+    height: 124px;
+  }
+}
+.distribution-panel ul {
+  margin: 0 30px 30px;
+}
+@media (min-width: 901px) and (max-height: 850px) {
+  .module-main {
+    height: 100vh;
+    overflow: hidden;
+  }
+  .dashboard-content {
+    height: calc(100vh - 64px);
+    padding: 18px 26px;
+    overflow: hidden;
+  }
+  .summary-grid {
+    gap: 18px;
+  }
+  .summary-card {
+    min-height: 106px;
+    padding: 17px 20px;
+    border-radius: 15px;
+  }
+  .summary-card div {
+    gap: 4px;
+  }
+  .summary-card span {
+    font-size: 15px;
+  }
+  .summary-card strong {
+    font-size: 34px;
+  }
+  .summary-card small {
+    margin-top: 5px;
+    font-size: 12px;
+  }
+  .summary-card i {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+  }
+  .summary-card svg {
+    width: 26px;
+    height: 26px;
+  }
+  .analytics-grid {
+    gap: 18px;
+    margin-top: 18px;
+  }
+  .panel {
+    border-radius: 15px;
+  }
+  .panel header {
+    min-height: 54px;
+    padding: 16px 22px 0;
+  }
+  .panel h2 {
+    font-size: 19px;
+  }
+  .panel header p {
+    margin-top: 4px;
+    font-size: 13px;
+  }
+  .statistics-panel header b {
+    font-size: 13px;
+  }
+  .line-chart {
+    height: 148px;
+    margin: 16px 25px 0 38px;
+  }
+  .line-chart i {
+    width: 11px;
+    height: 11px;
+  }
+  .chart-months {
+    margin: 5px 25px 0 38px;
+    font-size: 12px;
+  }
+  .chart-key {
+    gap: 16px;
+    margin: 15px 0 17px;
+    font-size: 13px;
+  }
+  .distribution-panel header p {
+    font-size: 13px;
+  }
+  .donut {
+    width: 132px;
+    height: 132px;
+    margin: 15px auto 13px;
+  }
+  .donut span {
+    width: 76px;
+    height: 76px;
+  }
+  .distribution-panel ul {
+    gap: 6px;
+    margin: 0 22px 16px;
+    font-size: 12px;
+  }
+  .distribution-panel li {
+    grid-template-columns: 9px 1fr auto;
+    gap: 7px;
+  }
+  .distribution-panel li i {
+    width: 9px;
+    height: 9px;
+  }
+  .activity-panel {
+    margin-top: 18px;
+  }
+  .activity-panel header {
+    min-height: 48px;
+    padding: 0 22px;
+  }
+  .activity-panel header button {
+    font-size: 14px;
+  }
+  .activity-row {
+    grid-template-columns: 1fr auto;
+    padding: 11px 22px;
+    font-size: 13px;
+  }
+  .activity-row small,
+  .activity-row time {
+    font-size: 11px;
+  }
+  .activity-row:nth-of-type(2) {
+    display: none;
+  }
+}
+@media (max-width: 900px) {
+  .module-main {
+    margin-left: 0;
+  }
+  .dashboard-content {
+    padding: 22px;
+  }
+  .summary-grid,
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+  .analytics-grid {
+    margin-top: 22px;
+  }
+  .activity-panel {
+    margin-top: 22px;
+  }
+}
+@media (max-width: 540px) {
+  .dashboard-content {
+    padding: 15px;
+  }
+  .summary-grid {
+    gap: 14px;
+  }
+  .summary-card {
+    min-height: 130px;
+  }
+  .summary-card small {
+    margin-top: 7px;
+  }
+  .panel header {
+    padding: 23px 20px 0;
+  }
+  .line-chart {
+    margin: 24px 20px 0 25px;
+    height: 220px;
+  }
+  .chart-months {
+    margin: 8px 20px 0 25px;
+    font-size: 12px;
+  }
+  .chart-key {
+    margin: 25px 0;
+    font-size: 13px;
+  }
+  .activity-panel header {
+    padding: 0 20px;
+  }
+  .activity-row {
+    padding: 16px 20px;
+  }
+}

@@ -1,0 +1,72 @@
+@use '../admin-shared/admin-module';
+
+.metric:nth-child(2) .metric-icon {
+  background: #e8fbf3;
+  color: #0ca774;
+}
+.metric:nth-child(3) .metric-icon {
+  background: #f4eaff;
+  color: #8b36df;
+}
+
+.user-form {
+  grid-template-columns: 1fr 1fr 160px auto;
+}
+.password-form {
+  grid-template-columns: minmax(260px, 460px) auto;
+  max-width: 720px;
+}
+.admin-recovery {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 22px;
+  padding: 14px 18px;
+  border: 1px solid #cadbff;
+  border-radius: 13px;
+  background: #f4f7ff;
+  color: #65728b;
+  font-size: 12px;
+  line-height: 1.45;
+}
+.admin-recovery strong {
+  color: #285dd7;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.delete-action {
+  margin-left: 12px;
+  color: #d33e55;
+}
+.delete-action:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+.current-account {
+  margin-left: 12px;
+}
+.form-error button {
+  margin-left: 10px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  text-decoration: underline;
+}
+
+@media (max-width: 1120px) {
+  .user-form {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .admin-recovery {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+}

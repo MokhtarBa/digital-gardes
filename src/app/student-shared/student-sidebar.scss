@@ -1,0 +1,12 @@
+@import '../professor-shared/professor-sidebar.scss';
+
+.brand-mark,
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  background: #17a77a;
+}
+
+.sidebar {
+  background: linear-gradient(180deg, #123e47 0%, #0e7663 100%);
+  box-shadow: 4px 0 20px rgba(13, 111, 92, 0.17);
+}

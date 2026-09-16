@@ -1,0 +1,14 @@
+@import '../professor-shared/professor-module.scss';
+
+.student-module {
+  background: #effbf6;
+}
+.module-content h1 {
+  color: #123b35;
+}
+.primary {
+  background: linear-gradient(135deg, #23b889, #129c70);
+}
+.primary:hover:not(:disabled) {
+  background: #11875f;
+}

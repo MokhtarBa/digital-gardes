@@ -1,0 +1,124 @@
+<main class="admin-login">
+  <section class="portal-panel" aria-label="Digital Grades administrator portal">
+    <div class="portal-brand">
+      <span class="brand-mark" aria-hidden="true"
+        ><svg viewBox="0 0 24 24">
+          <path d="m2.5 9.25 9.5-5.1 9.5 5.1-9.5 5.1-9.5-5.1Z" />
+          <path d="M6.5 11.4v4.25c0 1.35 2.45 2.45 5.5 2.45s5.5-1.1 5.5-2.45V11.4" />
+          <path d="M21.5 9.4v5.1" /></svg
+      ></span>
+      <span><strong>Digital Grades</strong><small>Academic Management System</small></span>
+    </div>
+
+    <div class="portal-hero">
+      <span class="hero-shield" aria-hidden="true"
+        ><svg viewBox="0 0 24 24">
+          <path
+            d="M12 3.25 19 6v5.1c0 4.15-2.72 7.85-7 9.65-4.28-1.8-7-5.5-7-9.65V6l7-2.75Z"
+          /></svg
+      ></span>
+      <h1>Admin Portal</h1>
+      <p>
+        Secure access to manage university<br />academic operations, users, classes, and<br />grade
+        approvals.
+      </p>
+    </div>
+
+    <ul class="portal-benefits">
+      <li>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5.5 12.25 4.1 4.1 8.9-8.9" /></svg
+        >Manage students, professors &amp; staff
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5.5 12.25 4.1 4.1 8.9-8.9" /></svg
+        >Oversee grade form approvals
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5.5 12.25 4.1 4.1 8.9-8.9" /></svg
+        >Generate academic reports
+      </li>
+    </ul>
+    <p class="copyright">© 2026 Digital Grades · All rights reserved</p>
+  </section>
+
+  <section class="form-panel" aria-labelledby="admin-sign-in-title">
+    <form (ngSubmit)="login()">
+      <p class="access-chip">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M12 3.25 19 6v5.1c0 4.15-2.72 7.85-7 9.65-4.28-1.8-7-5.5-7-9.65V6l7-2.75Z"
+          /></svg
+        >Administrator Access
+      </p>
+      <h2 id="admin-sign-in-title">Sign in</h2>
+      <p class="intro">Enter your credentials to access the admin portal.</p>
+
+      <label
+        >Email address
+        <span class="input-wrap">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3.5" y="5.5" width="17" height="13" rx="2" />
+            <path d="m4.5 7 7.5 5.5L19.5 7" />
+          </svg>
+          <input
+            type="email"
+            name="email"
+            [(ngModel)]="email"
+            placeholder="admin@university.dz"
+            autocomplete="email"
+            required
+          />
+        </span>
+      </label>
+
+      <label
+        >Password
+        <span class="input-wrap password">
+          <svg class="field-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="5" y="10" width="14" height="10" rx="2" />
+            <path d="M8.5 10V7.5a3.5 3.5 0 0 1 7 0V10" />
+          </svg>
+          <input
+            name="password"
+            [type]="showPassword ? 'text' : 'password'"
+            [(ngModel)]="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            required
+          />
+          <button
+            type="button"
+            (click)="togglePassword()"
+            [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M2.75 12s3.25-5.5 9.25-5.5 9.25 5.5 9.25 5.5-3.25 5.5-9.25 5.5S2.75 12 2.75 12Z"
+              />
+              <circle cx="12" cy="12" r="2.5" />
+              <path [class.hidden]="!showPassword" d="M4 4l16 16" />
+            </svg>
+          </button>
+        </span>
+      </label>
+
+      <div class="options">
+        <label
+          ><input type="checkbox" name="rememberMe" [(ngModel)]="rememberMe" />
+          <span>Remember me</span></label
+        >
+      </div>
+      @if (errorMessage) {
+        <p class="error">{{ errorMessage }}</p>
+      }
+      <button class="submit" type="submit" [disabled]="isSubmitting">
+        {{ isSubmitting ? 'Signing in…' : 'Sign In' }}
+      </button>
+      <button type="button" class="back" (click)="goBackToLogin()">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>Back to
+        login page
+      </button>
+    </form>
+    <p class="restricted">Restricted access. Unauthorized use is prohibited.</p>
+  </section>
+</main>

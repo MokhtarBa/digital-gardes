@@ -1,0 +1,53 @@
+<main class="role-login">
+  <section class="login-card">
+    <header>
+      <div class="logo">DG</div>
+      <h1>Welcome Back</h1>
+      <p>Sign in to continue to Digital Grades</p>
+    </header>
+
+    <div class="role-options">
+      <button
+        type="button"
+        class="role professor"
+        [class.selected]="accountType === 'professor'"
+        (click)="selectAccount('professor')"
+      >
+        <span class="role-icon" aria-hidden="true"
+          ><svg viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="3" />
+            <path
+              d="M5.75 19.75c.7-3.65 2.78-5.5 6.25-5.5s5.55 1.85 6.25 5.5M4 5.5l8-3.25 8 3.25-8 3.25L4 5.5Zm15 1.5v3"
+            /></svg
+        ></span>
+        <strong>Professor</strong>
+        <small>Access your classes<br />and manage grades</small>
+        <em>Sign in as Professor</em>
+      </button>
+      <button
+        type="button"
+        class="role student"
+        [class.selected]="accountType === 'student'"
+        (click)="selectAccount('student')"
+      >
+        <span class="role-icon" aria-hidden="true"
+          ><svg viewBox="0 0 24 24">
+            <circle cx="12" cy="7.5" r="3.4" />
+            <path d="M5.25 20c.7-3.82 2.94-5.75 6.75-5.75s6.05 1.93 6.75 5.75" /></svg
+        ></span>
+        <strong>Student</strong>
+        <small>View your grades<br />and performance</small>
+        <em>Sign in as Student</em>
+      </button>
+    </div>
+
+    <div class="divider"><span></span><small>or</small><span></span></div>
+    <a class="admin-access" href="/admin-login" (click)="openAdminLogin($event)"
+      ><span class="admin-icon" aria-hidden="true"
+        ><svg viewBox="0 0 24 24">
+          <path d="M12 3.25 19 6v5.1c0 4.15-2.72 7.85-7 9.65-4.28-1.8-7-5.5-7-9.65V6l7-2.75Z" />
+          <path d="M9 12.25 11 14.25l4-4" /></svg></span
+      ><span>Administrator access<strong>Sign in as Admin</strong></span></a
+    >
+  </section>
+</main>

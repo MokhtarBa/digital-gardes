@@ -1,0 +1,84 @@
+<main class="professor-login">
+  <section class="portal-panel">
+    <div class="portal-brand">
+      <span class="brand-mark"
+        ><svg viewBox="0 0 24 24">
+          <path d="m2.5 9.25 9.5-5.1 9.5 5.1-9.5 5.1-9.5-5.1Z" />
+          <path d="M6.5 11.4v4.25c0 1.35 2.45 2.45 5.5 2.45s5.5-1.1 5.5-2.45V11.4" />
+          <path d="M21.5 9.4v5.1" /></svg></span
+      ><span><strong>Digital Grades</strong><small>Academic Management System</small></span>
+    </div>
+    <div class="portal-hero">
+      <span class="hero-mark"
+        ><svg viewBox="0 0 24 24">
+          <circle cx="12" cy="7.5" r="3.2" />
+          <path d="M5.1 20c.7-3.85 2.98-5.8 6.9-5.8s6.2 1.95 6.9 5.8" />
+          <path d="m4.25 5.5 7.75-3 7.75 3-7.75 3-7.75-3Z" /></svg
+      ></span>
+      <h1>Professor Portal</h1>
+      <p>
+        Manage your assigned classes, prepare grade forms,<br />and submit them for administrator
+        approval.
+      </p>
+    </div>
+    <ul class="portal-benefits">
+      <li>✓ View your assigned classes</li>
+      <li>✓ Prepare grade forms for your students</li>
+      <li>✓ Track approval status in one place</li>
+    </ul>
+    <p class="copyright">© 2026 Digital Grades · All rights reserved</p>
+  </section>
+  <section class="form-panel">
+    <form (ngSubmit)="login()">
+      <p class="access-chip">Professor Access</p>
+      <h2>Sign in</h2>
+      <p class="intro">Use the email and password created by your administrator.</p>
+      <label
+        >Email address<span class="input-wrap"
+          ><svg viewBox="0 0 24 24">
+            <rect x="3.5" y="5.5" width="17" height="13" rx="2" />
+            <path d="m4.5 7 7.5 5.5L19.5 7" /></svg
+          ><input
+            type="email"
+            name="email"
+            [(ngModel)]="email"
+            placeholder="professor@university.dz"
+            autocomplete="email"
+            required /></span></label
+      ><label
+        >Password<span class="input-wrap password"
+          ><svg viewBox="0 0 24 24">
+            <rect x="5" y="10" width="14" height="10" rx="2" />
+            <path d="M8.5 10V7.5a3.5 3.5 0 0 1 7 0V10" /></svg
+          ><input
+            name="password"
+            [type]="showPassword ? 'text' : 'password'"
+            [(ngModel)]="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            required
+          /><button
+            type="button"
+            (click)="showPassword = !showPassword"
+            aria-label="Show or hide password"
+          >
+            ⌾
+          </button></span
+        ></label
+      >
+      <div class="options">
+        <label
+          ><input type="checkbox" name="rememberMe" [(ngModel)]="rememberMe" />
+          <span>Remember me</span></label
+        >
+      </div>
+      @if (errorMessage) {
+        <p class="error">{{ errorMessage }}</p>
+      }
+      <button class="submit" type="submit" [disabled]="isSubmitting">
+        {{ isSubmitting ? 'Signing in…' : 'Sign In' }}</button
+      ><button type="button" class="back" (click)="goBack()">← Back to login page</button>
+    </form>
+    <p class="restricted">Your administrator manages account access.</p>
+  </section>
+</main>
